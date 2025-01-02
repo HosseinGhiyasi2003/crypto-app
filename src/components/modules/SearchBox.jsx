@@ -49,7 +49,7 @@ function SearchBox({ currency, setCurrency }) {
       />
       <select
         value={currency}
-        className="bg-[#23242e] h-[50px] rounded-md p-3 font-semibold text-[16px]"
+        className="bg-[#23242e] h-[50px] rounded-md p-3 font-semibold text-[16px] block sm:inline-block w-24 mt-3 sm:mt-0"
         onChange={(e) => setCurrency(e.target.value)}
       >
         <option value="usd">USD</option>
@@ -58,7 +58,7 @@ function SearchBox({ currency, setCurrency }) {
       </select>
       {/* Always render the dropdown if there's a search text */}
       {searchText && (
-        <div className="w-[300px] bg-[#18181c] overflow-y-scroll h-[400px] absolute top-[60px] p-3 border-2 border-[#22262e]">
+        <div className="w-[300px] bg-[#18181c] overflow-y-scroll h-[400px] absolute top-[120px] p-3 border-2 border-[#22262e] sm:top-[60px] rounded-md">
           {isLoading ? (
             <div className="flex justify-center">
               <RotatingLines

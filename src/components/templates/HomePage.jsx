@@ -29,7 +29,7 @@ function HomePage() {
     <main>
       <section className='max-w-[1200px] mx-auto px-3'>
         <SearchBox currency={currency} setCurrency={setCurrency} />
-        <TableCoin coins={coins} isLoading={isLoading}  />
+        <TableCoin coins={coins} isLoading={isLoading} currency={currency} setCurrency={setCurrency}  />
         <PaginationSection page={page} setPage={setPage} />
       </section>
     </main>

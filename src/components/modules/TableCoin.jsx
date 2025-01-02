@@ -2,7 +2,7 @@ import React from "react";
 import TableRow from "./TableRow";
 import { RotatingLines } from "react-loader-spinner";
 
-function TableCoin({ coins, isLoading }) {
+function TableCoin({ coins, isLoading, currency, setCurrency }) {
   return (
     <>
       {isLoading ? (
@@ -26,7 +26,7 @@ function TableCoin({ coins, isLoading }) {
             </thead>
             <tbody>
               {coins.map((coin) => (
-                <TableRow {...coin} key={coin.id} />
+                <TableRow {...coin} key={coin.id} currency={currency} setCurrency={setCurrency} />
               ))}
             </tbody>
           </table>
