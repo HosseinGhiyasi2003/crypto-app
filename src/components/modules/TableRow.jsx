@@ -2,20 +2,38 @@ import chartDown from "../../assets/chart-down.svg";
 import chartUp from "../../assets/chart-up.svg";
 import { BsCurrencyDollar, BsCurrencyEuro } from "react-icons/bs";
 import { PiCurrencyJpy } from "react-icons/pi";
+import { marketChart } from "../../services/cryptoApi";
 
 function TableRow({
+  id,
   image,
   symbol,
   name,
   current_price,
   price_change_percentage_24h: price_change,
   total_volume,
+  ath,
+  market_cap,
   currency,
-  setCurrency,
+  setChart,
 }) {
+  const chartHanlder = async () => {
+    try {
+      const res = await fetch(marketChart(id));
+      const data = await res.json();
+      console.log({ ...data, name, image, ath, market_cap, current_price });
+      setChart({ ...data, name, image, ath, market_cap, current_price });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <tr className="border-b-[1px] border-[#22262e] h-20 text-[1.1rem] font-semibold">
-      <td className="flex mt-6 gap-2 px-3 md:px-0">
+      <td
+        className="flex mt-6 gap-2 px-3 md:px-0 cursor-pointer"
+        onClick={chartHanlder}
+      >
         <img src={image} alt="" className="w-6 h-6" />
         <span className="text-[#9fa6b7] text-[15px] md:text-[20px] pr-4">
           {symbol.toUpperCase()}

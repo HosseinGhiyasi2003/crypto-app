@@ -20,7 +20,6 @@ function SearchBox({ currency, setCurrency }) {
           signal: controller.signal,
         });
         const data = await res.json();
-        console.log(data.coins);
         if (data.coins) {
           setCoins(data.coins);
           setIsLoading(false);
@@ -39,7 +38,7 @@ function SearchBox({ currency, setCurrency }) {
   }, [searchText]);
 
   return (
-    <div className="relative my-14">
+    <div className="relative mb-14 mt-32">
       <input
         type="text"
         placeholder="Search"
