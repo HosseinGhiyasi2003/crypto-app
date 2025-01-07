@@ -14,7 +14,7 @@ import {
 
 function Chart({ chart, setChart }) {
   const [coinType, setCoinType] = useState("prices");
-  console.log(chart);
+  // console.log(chart);
 
   const changeStateHandler = (e) => {
     const newCoinType = e.target.innerText.toLowerCase().replace(" ", "_");
@@ -23,7 +23,7 @@ function Chart({ chart, setChart }) {
 
   return (
     <div
-      className={`w-full h-full  fixed top-0 left-0 px-3 mt-28  ${
+      className={`w-full h-full  fixed top-0 left-0 px-3 pt-28  ${
         chart ? "backdrop-blur-sm" : ""
       }`}
     >
@@ -35,13 +35,13 @@ function Chart({ chart, setChart }) {
               className="w-7 h-7 md:w-10 md:h-10"
               alt={chart.name}
             />
-            <span className="text-[20px] md:text-[25px] font-semibold">
+            <span className="text-[15px] md:text-[20px] font-semibold">
               {chart.name}
             </span>
           </div>
           <span className="">
             <IoMdClose
-              className="text-3xl text-[#2b2b2d] cursor-pointer"
+              className="text-3xl text-[#2b2b2d] hover:text-[#3c3c3d] cursor-pointer"
               onClick={() => setChart(false)}
             />
           </span>
@@ -72,7 +72,7 @@ function Chart({ chart, setChart }) {
             className={
               coinType === "prices"
                 ? "bg-[#3874ff] text-white text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
-                : "border-2 border-[#3874ff] text-[#3874ff] text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
+                : "border-2 border-[#3874ff] text-[#3874ff] text-[12px] sm:text-[16px] p-1 font-normal rounded-md hover:font-bold "
             }
             onClick={changeStateHandler}
           >
@@ -82,7 +82,7 @@ function Chart({ chart, setChart }) {
             className={
               coinType === "market_caps"
                 ? "bg-[#3874ff] text-white text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
-                : "border-2 border-[#3874ff] text-[#3874ff] text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
+                : "border-2 border-[#3874ff] text-[rgb(56,116,255)] text-[12px] sm:text-[16px] p-1 font-normal rounded-md hover:font-bold"
             }
             onClick={changeStateHandler}
           >
@@ -92,14 +92,14 @@ function Chart({ chart, setChart }) {
             className={
               coinType === "total_volumes"
                 ? "bg-[#3874ff] text-white text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
-                : "border-2 border-[#3874ff] text-[#3874ff] text-[12px] sm:text-[16px] p-1 font-normal rounded-md"
+                : "border-2 border-[#3874ff] text-[#3874ff] text-[12px] sm:text-[16px] p-1 font-normal rounded-md hover:font-bold"
             }
             onClick={changeStateHandler}
           >
             Total Volumes
           </button>
         </div>
-        <div className="flex justify-around">
+        {/* <div className="flex justify-around">
           <h2 className="text-[12px] md:text-[18px]">
             <span className="text-[#3874ff] font-semibold">Prices: </span>
             <span>${chart.current_price}</span>
@@ -112,7 +112,7 @@ function Chart({ chart, setChart }) {
             <span className="text-[#3874ff] font-semibold">Market Cap: </span>
             <span>${chart.market_cap}</span>
           </h2>
-        </div>
+        </div> */}
       </div>
     </div>
   );

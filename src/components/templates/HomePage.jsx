@@ -26,11 +26,23 @@ function HomePage() {
     };
     getData();
   }, [page, currency]);
-
+  console.log(coins);
+  const transformedCoins = coins.map((coin) => ({
+    id: coin.id,
+    ath: coin.ath,
+    current_price: coin.current_price,
+    market_cap: coin.market_cap
+  }));
+  // console.log(transformedCoins);
   return (
     <main>
       <section className="max-w-[1200px] mx-auto px-3">
-        <SearchBox currency={currency} setCurrency={setCurrency} />
+        <SearchBox
+          currency={currency}
+          setCurrency={setCurrency}
+          setChart={setChart}
+          transformedCoins={transformedCoins}
+        />
         <TableCoin
           coins={coins}
           isLoading={isLoading}

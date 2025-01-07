@@ -21,7 +21,6 @@ function TableRow({
     try {
       const res = await fetch(marketChart(id));
       const data = await res.json();
-      console.log({ ...data, name, image, ath, market_cap, current_price });
       setChart({ ...data, name, image, ath, market_cap, current_price });
     } catch (error) {
       console.log(error);
@@ -29,10 +28,10 @@ function TableRow({
   };
 
   return (
-    <tr className="border-b-[1px] border-[#22262e] h-20 text-[1.1rem] font-semibold">
+    <tr className="border-b-[1px] border-[#22262e] h-20 text-[1.1rem] font-semibold cursor-pointer hover:bg-[#13121f]" onClick={chartHanlder} >
       <td
-        className="flex mt-6 gap-2 px-3 md:px-0 cursor-pointer"
-        onClick={chartHanlder}
+        className="flex mt-6 gap-2 px-3 md:px-0 "
+        
       >
         <img src={image} alt="" className="w-6 h-6" />
         <span className="text-[#9fa6b7] text-[15px] md:text-[20px] pr-4">

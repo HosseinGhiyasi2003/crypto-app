@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { searchApi } from "../../services/cryptoApi";
+import { marketChart, searchApi } from "../../services/cryptoApi";
 import { RotatingLines } from "react-loader-spinner";
 
-function SearchBox({ currency, setCurrency }) {
+function SearchBox({ currency, setCurrency, setChart, transformedCoins }) {
+  // console.log(transformedCoins);
   const [searchText, setSearchText] = useState("");
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,25 @@ function SearchBox({ currency, setCurrency }) {
       controller.abort();
     };
   }, [searchText]);
+  // console.log(coins);
+
+  const showHandler = async (id, image, name) => {
+    const filteredData = transformedCoins.filter(data => data.id === id)
+    // const ath =  filteredData[0].ath;
+    // console.log(filteredData[0].ath);
+    // const current_price = filteredData[0].current_price;
+    // const market_cap = filteredData[0].market_cap;
+    // console.log(ath);
+    // console.log(current_price);
+    // console.log(market_cap);
+    try {
+      const res = await fetch(marketChart(id));
+      const data = await res.json();
+      setChart({ ...data, name, image,});
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="relative mb-14 mt-32">
@@ -57,7 +77,7 @@ function SearchBox({ currency, setCurrency }) {
       </select>
       {/* Always render the dropdown if there's a search text */}
       {searchText && (
-        <div className="w-[300px] bg-[#18181c] overflow-y-scroll h-[400px] absolute top-[120px] p-3 border-2 border-[#22262e] sm:top-[60px] rounded-md">
+        <div className="w-[300px] bg-[#18181c] overflow-y-scroll h-[400px] absolute top-[120px] border-2 border-[#22262e] sm:top-[60px] rounded-md">
           {isLoading ? (
             <div className="flex justify-center">
               <RotatingLines
@@ -71,12 +91,13 @@ function SearchBox({ currency, setCurrency }) {
             <ul className="">
               {coins.map((coin) => (
                 <li
-                  key={coin.id}
-                  className="flex gap-7 border-b-2 border-[#22262e] py-4"
-                >
-                  <img src={coin.thumb} alt={coin.name} className="w-6 h-6" />
-                  <span className="text-center">{coin.name}</span>
-                </li>
+                key={coin.id}
+                className="flex gap-7 border-b-2 border-[#22262e] p-4 cursor-pointer hover:bg-[#18172c]"
+                onClick={() => showHandler(coin.id, coin.thumb, coin.name)} // Pass all three parameters
+              >
+                <img src={coin.thumb} alt={coin.name} className="w-6 h-6" />
+                <span className="text-center">{coin.name}</span>
+              </li>
               ))}
             </ul>
           ) : (
